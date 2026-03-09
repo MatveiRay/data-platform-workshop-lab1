@@ -20,7 +20,10 @@ jobs:
           python-version: "3.11"
 
       - name: Check Python syntax
-        run: python -m py_compile recommendation_dag.py
+        run: |
+            python -m py_compile airflow/dags/recommendation_dag.py
+            python -m py_compile click_generator.py
+            python -m py_compile flink_job/window_aggregation.py
 
   terraform-check:
     name: Terraform check
