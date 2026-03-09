@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ env_var('BQ_PROJECT_ID', 'your-project') }}"
+    schema: "{{ env_var('BQ_RAW_DATASET', 'raw') }}"
+    tables:
+      - name: clicks
+      - name: orders
+
+models:
+  - name: popular_products
+    description: "Клики за последние 5 минут"
+    columns:
+      - name: product_id
+        tests: [not_null]
+  - name: top_products
+    description: "Топ-10 товаров (клики + заказы)"
+    columns:
+      - name: product_id
+        tests: [not_null]
+      - name: score
